@@ -21,9 +21,16 @@ const cardsSlice = createSlice({
         isActive: card.id === action.payload,
       }));
     },
+    updateCard: (state, action) => {
+      const index = state.findIndex((card) => card.id === action.payload.id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...action.payload };
+      }
+    },
   },
 });
 
-export const { addCard, removeCard, setActiveCard } = cardsSlice.actions;
+export const { addCard, removeCard, setActiveCard, updateCard } =
+  cardsSlice.actions;
 
 export default cardsSlice.reducer;

@@ -2,10 +2,12 @@
 // Коментар: HomePage відображає активну картку, список
 // неактивних карток та кнопку додавання нової картки
 
+// src/pages/HomePage.jsx
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Card from "../features/cards/CardList";
+import Card from "../features/cards/Card";
+import CardList from "../features/cards/CardList";
 
 const HomePage = () => {
   const cards = useSelector((state) => state.cards);
@@ -17,7 +19,7 @@ const HomePage = () => {
       {activeCard && <Card card={activeCard} />}
       <CardList cards={cards.filter((card) => !card.isActive)} />
       {cards.length < 4 && (
-        <Link to="/addcard">
+        <Link to="/add-card">
           <button>Add New Card</button>
         </Link>
       )}

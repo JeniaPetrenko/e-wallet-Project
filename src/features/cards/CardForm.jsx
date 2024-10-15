@@ -1,6 +1,6 @@
 // src/features/cards/CardForm.jsx
 // Коментар: CardForm компонент для додавання та редагування карток з валідацією
-import React from "react";
+import React, { useState } from "react";
 import {
   validateCardNumber,
   validateExpiryDate,
@@ -18,11 +18,12 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
+
     if (!validateCardNumber(cardData.cardNumber)) {
       newErrors.cardNumber = "Invalid card number";
     }
     if (!validateExpiryDate(cardData.expireMonth, cardData.expireYear)) {
-      newErrors.expire = "Invalid expire year";
+      newErrors.expire = "Invalid expire date";
     }
     if (!validateCardholderName(cardData.cardholderName)) {
       newErrors.cardholderName = "Invalid cardholder name";
@@ -37,8 +38,7 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
     <form onSubmit={handleSubmit}>
       <select
         name="vendor"
-        id=""
-        value={cardData.vendor}
+        value={cardData.vendor || ""} // Додано || "" для уникнення помилки undefined
         onChange={handleChange}
       >
         <option value="">Select vendor</option>
@@ -49,58 +49,39 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
       <input
         type="text"
         name="cardNumber"
-        value={cardData.cardNumber}
+        value={cardData.cardNumber || ""} // Додано || ""
         onChange={handleChange}
-        placeholder="Cardholder Number"
-        id=""
+        placeholder="Card Number"
       />
       <input
         type="text"
         name="cardholderName"
-        value={cardData.cardholderName}
+        value={cardData.cardholderName || ""} // Додано || ""
         onChange={handleChange}
         placeholder="Cardholder Name"
-        id=""
       />
-      <input
-        type="text"
-        name="cardNumber"
-        value={cardData.cardNumber}
-        onChange={handleChange}
-        placeholder="Cardholder Name"
-        id=""
-      />
+
       <input
         type="text"
         name="expireMonth"
-        value={cardData.expireMonth}
+        value={cardData.expireMonth || ""} // Додано || ""
         onChange={handleChange}
         placeholder="Expiry Month"
-        id=""
       />
       <input
         type="text"
         name="expireYear"
-        value={cardData.expireYear}
+        value={cardData.expireYear || ""} // Додано || ""
         onChange={handleChange}
         placeholder="Expiry Year"
-        id=""
       />
-      <input
-        type="text"
-        name="cardNumber"
-        value={cardData.cardNumber}
-        onChange={handleChange}
-        placeholder="Cardholder Name"
-        id=""
-      />
+
       <input
         type="text"
         name="cvv"
-        value={cardData.cvv}
+        value={cardData.cvv || ""} // Додано || ""
         onChange={handleChange}
         placeholder="CVV"
-        id=""
       />
       <button type="submit">Add Card</button>
       {Object.keys(errors).map((key) => (
@@ -112,3 +93,10 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
   );
 };
 export default CardForm;
+
+// Виправлення та зауваження:
+// 1. Видалено дублікати полів вводу для cardNumber.
+// 2. Виправлено placeholder для поля cardNumber.
+// 3. Додано || "" для всіх value атрибутів, щоб уникнути помилок з undefined.
+// 4. Змінено повідомлення про помилку для expiry date.
+// 5. Видалено непотрібні id атрибути з input полів.
