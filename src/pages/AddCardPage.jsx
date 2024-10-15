@@ -12,7 +12,7 @@ const AddCardPage = () => {
   const navigate = useNavigate();
 
   const handleAddCard = (card) => {
-    dispatch(addCard(cardData));
+    dispatch(addCard(card));
     navigate("/");
   };
 

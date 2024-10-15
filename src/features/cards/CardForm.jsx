@@ -15,6 +15,7 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
     setCardData({ ...cardData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -28,10 +29,12 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
     if (!validateCardholderName(cardData.cardholderName)) {
       newErrors.cardholderName = "Invalid cardholder name";
     }
+    if (!validateCardholderName(cardData.cardholderName)) {
+      newErrors.cardholderName = "Name cannot contain numbers";
+    }
     if (Object.keys(newErrors).length === 0) {
       onSubmit(cardData);
-    } else {
-      setErrors(newErrors);
+      setCardData(initialData); // Очищення форми після успішного додавання
     }
   };
   return (
@@ -61,20 +64,36 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
         placeholder="Cardholder Name"
       />
 
-      <input
-        type="text"
+      <select
         name="expireMonth"
-        value={cardData.expireMonth || ""} // Додано || ""
+        value={cardData.expireMonth}
         onChange={handleChange}
-        placeholder="Expiry Month"
-      />
-      <input
-        type="text"
+        required
+      >
+        <option value="">Month</option>
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+          <option key={month} value={month.toString().padStart(2, "0")}>
+            {month.toString().padStart(2, "0")}
+          </option>
+        ))}
+      </select>
+
+      <select
         name="expireYear"
-        value={cardData.expireYear || ""} // Додано || ""
+        value={cardData.expireYear}
         onChange={handleChange}
-        placeholder="Expiry Year"
-      />
+        required
+      >
+        <option value="">Year</option>
+        {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i).map(
+          (year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          )
+        )}
+      </select>
+      {errors.expireDate && <p className="error">{errors.expireDate}</p>}
 
       <input
         type="text"
