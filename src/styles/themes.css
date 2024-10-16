@@ -1,0 +1,25 @@
+/* src/styles/theme.css */
+
+/* styles for light theme */
+.theme-light {
+    --background-color: white;
+    --text-color: black;
+}
+
+/* styles for dark theme */
+.theme-dark {
+    --background-color: black;
+    --text-color: white;
+}
+
+/* styles for green theme */
+.theme-green {
+    --background-color: #348836;
+    --text-color: rgb(42, 10, 10);
+}
+
+/* Apply these variables globally */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}

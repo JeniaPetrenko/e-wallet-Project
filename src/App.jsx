@@ -6,11 +6,16 @@ import AddCardPage from "./pages/AddCardPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Header from "./components/Header"; // Імпортуємо Header компонент
+import "./styles/themes.css";
+import { useSelector } from "react-redux";
 
 function App() {
+  const theme = useSelector((state) => state.settings.theme);
   return (
-    <Router>
-      <div className="App">
+    <div className={`App theme-${theme}`}>
+      {" "}
+      {/* Додаємо клас теми */}
+      <Router>
         <Header /> {/* Вставляємо компонент Header */}
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -18,8 +23,8 @@ function App() {
           <Route path="/card/:id" element={<CardDetailsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>{" "}
+    </div>
   );
 }
 

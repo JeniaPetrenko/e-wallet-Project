@@ -36,10 +36,18 @@ const cardsSlice = createSlice({
         state[index] = { ...state[index], ...action.payload };
       }
     },
+    deleteInactiveCards: (state) => {
+      state.cards = state.cards.filter((card) => card.isActive);
+    },
   },
 });
 
-export const { addCard, removeCard, setActiveCard, updateCard } =
-  cardsSlice.actions;
+export const {
+  addCard,
+  removeCard,
+  setActiveCard,
+  updateCard,
+  deleteInactiveCards,
+} = cardsSlice.actions;
 
 export default cardsSlice.reducer;
