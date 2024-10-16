@@ -9,7 +9,7 @@ import CardForm from "../features/cards/CardForm";
 const CardDetailsPage = () => {
   const { id } = useParams();
   const card = useSelector((state) =>
-    state.cards.find((c) => c.id === parseInt(id))
+    state.cards.cards.find((c) => c.id === parseInt(id))
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();

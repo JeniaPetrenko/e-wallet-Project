@@ -7,7 +7,7 @@ import {
   validateCardholderName,
 } from "../../utils/validation";
 
-const CardForm = ({ onSubmit, initialData = {} }) => {
+const CardForm = ({ onSubmit, initialData = {}, totalCards }) => {
   const [cardData, setCardData] = useState(initialData);
   const [errors, setErrors] = useState({});
 
@@ -20,21 +20,43 @@ const CardForm = ({ onSubmit, initialData = {} }) => {
     e.preventDefault();
     const newErrors = {};
 
+    console.log("Validatin card data", cardData);
+
     if (!validateCardNumber(cardData.cardNumber)) {
       newErrors.cardNumber = "Invalid card number";
+      console.log("Invalid card number: " + cardData.cardNumber);
     }
+
     if (!validateExpiryDate(cardData.expireMonth, cardData.expireYear)) {
-      newErrors.expire = "Invalid expire date";
+      newErrors.expire = "The expiry date must be in the future";
+      console.log(
+        "Invalid expiry date: " +
+          cardData.expireMonth +
+          "/" +
+          cardData.expireYear
+      );
     }
+
     if (!validateCardholderName(cardData.cardholderName)) {
       newErrors.cardholderName = "Invalid cardholder name";
     }
     if (!validateCardholderName(cardData.cardholderName)) {
       newErrors.cardholderName = "Name cannot contain numbers";
+      console.log("Invalid cardholder name: " + cardData.cardholderName);
     }
+
+    if (totalCards >= 4) {
+      newErrors.cardLimit = "Maximum 4 cards allowed";
+      console.log("Card limit reached. Total cards: " + totalCards);
+    }
+
     if (Object.keys(newErrors).length === 0) {
+      console.log("Submitting valid card data: " + cardData);
       onSubmit(cardData);
       setCardData(initialData); // Очищення форми після успішного додавання
+    } else {
+      setErrors(newErrors);
+      console.log("Invalid card data: ", newErrors);
     }
   };
   return (

@@ -17,7 +17,7 @@ const Card = ({ card }) => {
       <p>Card Number: **** **** **** {card.cardNumber.slice(-4)}</p>
       <p>Cardholder: {card.cardholder}</p>
       <p>
-        Expire: {card.expireMonth}/{card.ixpireYear}
+        Expire: {card.expireMonth}/{card.expireYear}
       </p>
       {!card.isActive && (
         <>
