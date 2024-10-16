@@ -1,26 +1,38 @@
 // src/features/cards/CardForm.jsx
 // Коментар: CardForm компонент для додавання та редагування карток з валідацією
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   validateCardNumber,
   validateExpiryDate,
   validateCardholderName,
 } from "../../utils/validation";
 
-const CardForm = ({ onSubmit, initialData = {}, totalCards }) => {
+const CardForm = ({
+  onSubmit,
+  initialData = {},
+  totalCards,
+  isEditing = false,
+}) => {
   const [cardData, setCardData] = useState(initialData);
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    if (isEditing) {
+      setCardData(initialData);
+    }
+  }, [isEditing, initialData]);
+
   const handleChange = (e) => {
-    setCardData({ ...cardData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+    const { name, value } = e.target;
+    setCardData({ ...cardData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
 
-    console.log("Validatin card data", cardData);
+    console.log("Validating card data", cardData);
 
     if (!validateCardNumber(cardData.cardNumber)) {
       newErrors.cardNumber = "Invalid card number";
@@ -39,100 +51,140 @@ const CardForm = ({ onSubmit, initialData = {}, totalCards }) => {
 
     if (!validateCardholderName(cardData.cardholderName)) {
       newErrors.cardholderName = "Invalid cardholder name";
-    }
-    if (!validateCardholderName(cardData.cardholderName)) {
-      newErrors.cardholderName = "Name cannot contain numbers";
       console.log("Invalid cardholder name: " + cardData.cardholderName);
     }
 
-    if (totalCards >= 4) {
+    if (totalCards >= 4 && !isEditing) {
       newErrors.cardLimit = "Maximum 4 cards allowed";
       console.log("Card limit reached. Total cards: " + totalCards);
     }
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Submitting valid card data: " + cardData);
+      console.log("Submitting valid card data: ", cardData);
       onSubmit(cardData);
-      setCardData(initialData); // Очищення форми після успішного додавання
+      if (!isEditing) {
+        setCardData(initialData); // Очищення форми після успішного додавання
+      }
     } else {
       setErrors(newErrors);
       console.log("Invalid card data: ", newErrors);
     }
   };
+
+  const getCardStyle = () => {
+    switch (cardData.vendor) {
+      case "visa":
+        return { backgroundColor: "#1A1F71", color: "white" };
+      case "mastercard":
+        return { backgroundColor: "#EB001B", color: "white" };
+      case "amex":
+        return { backgroundColor: "#006FCF", color: "white" };
+      default:
+        return { backgroundColor: "#CCCCCC", color: "black" };
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <select
-        name="vendor"
-        value={cardData.vendor || ""} // Додано || "" для уникнення помилки undefined
-        onChange={handleChange}
-      >
-        <option value="">Select vendor</option>
-        <option value="visa">Visa</option>
-        <option value="mastercard">Mastercard</option>
-        <option value="amex">American Express</option>
-      </select>
-      <input
-        type="text"
-        name="cardNumber"
-        value={cardData.cardNumber || ""} // Додано || ""
-        onChange={handleChange}
-        placeholder="Card Number"
-      />
-      <input
-        type="text"
-        name="cardholderName"
-        value={cardData.cardholderName || ""} // Додано || ""
-        onChange={handleChange}
-        placeholder="Cardholder Name"
-      />
+    <div>
+      <div className="card-preview" style={getCardStyle()}>
+        <h3>{cardData.vendor || "Card Vendor"}</h3>
+        <p>
+          {cardData.cardNumber
+            ? `**** **** **** ${cardData.cardNumber.slice(-4)}`
+            : "**** **** **** ****"}
+        </p>
+        <p>{cardData.cardholderName || "Cardholder Name"}</p>
+        <p>{`${cardData.expireMonth || "MM"}/${
+          cardData.expireYear || "YY"
+        }`}</p>
+      </div>
 
-      <select
-        name="expireMonth"
-        value={cardData.expireMonth}
-        onChange={handleChange}
-        required
-      >
-        <option value="">Month</option>
-        {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-          <option key={month} value={month.toString().padStart(2, "0")}>
-            {month.toString().padStart(2, "0")}
-          </option>
-        ))}
-      </select>
+      <form onSubmit={handleSubmit}>
+        <select
+          name="vendor"
+          value={cardData.vendor || ""}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select vendor</option>
+          <option value="visa">Visa</option>
+          <option value="mastercard">Mastercard</option>
+          <option value="amex">American Express</option>
+        </select>
+        {errors.vendor && <p className="error">{errors.vendor}</p>}
 
-      <select
-        name="expireYear"
-        value={cardData.expireYear}
-        onChange={handleChange}
-        required
-      >
-        <option value="">Year</option>
-        {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i).map(
-          (year) => (
-            <option key={year} value={year}>
+        <input
+          type="text"
+          name="cardNumber"
+          value={cardData.cardNumber || ""}
+          onChange={handleChange}
+          placeholder="Card Number"
+          maxLength="16"
+          required
+        />
+        {errors.cardNumber && <p className="error">{errors.cardNumber}</p>}
+
+        <input
+          type="text"
+          name="cardholderName"
+          value={cardData.cardholderName || ""}
+          onChange={handleChange}
+          placeholder="Cardholder Name"
+          required
+        />
+        {errors.cardholderName && (
+          <p className="error">{errors.cardholderName}</p>
+        )}
+
+        <select
+          name="expireMonth"
+          value={cardData.expireMonth || ""}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Month</option>
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+            <option key={month} value={month.toString().padStart(2, "0")}>
+              {month.toString().padStart(2, "0")}
+            </option>
+          ))}
+        </select>
+
+        <select
+          name="expireYear"
+          value={cardData.expireYear || ""}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Year</option>
+          {Array.from(
+            { length: 10 },
+            (_, i) => new Date().getFullYear() + i
+          ).map((year) => (
+            <option key={year} value={year.toString().slice(-2)}>
               {year}
             </option>
-          )
-        )}
-      </select>
-      {errors.expireDate && <p className="error">{errors.expireDate}</p>}
+          ))}
+        </select>
+        {errors.expire && <p className="error">{errors.expire}</p>}
 
-      <input
-        type="text"
-        name="cvv"
-        value={cardData.cvv || ""} // Додано || ""
-        onChange={handleChange}
-        placeholder="CVV"
-      />
-      <button type="submit">Add Card</button>
-      {Object.keys(errors).map((key) => (
-        <p key={key} style={{ color: "red" }}>
-          {errors[key]}
-        </p>
-      ))}
-    </form>
+        <input
+          type="text"
+          name="cvv"
+          value={cardData.cvv || ""}
+          onChange={handleChange}
+          placeholder="CVV"
+          maxLength="3"
+          required
+        />
+        {errors.cvv && <p className="error">{errors.cvv}</p>}
+
+        <button type="submit">{isEditing ? "Update Card" : "Add Card"}</button>
+      </form>
+    </div>
   );
 };
+
 export default CardForm;
 
 // Виправлення та зауваження:
@@ -140,4 +192,4 @@ export default CardForm;
 // 2. Виправлено placeholder для поля cardNumber.
 // 3. Додано || "" для всіх value атрибутів, щоб уникнути помилок з undefined.
 // 4. Змінено повідомлення про помилку для expiry date.
-// 5. Видалено непотрібні id атрибути з input полів.
+// 5. Видалено непотрібні id атрибути з input полів

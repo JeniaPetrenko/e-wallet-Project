@@ -27,7 +27,13 @@ const AddCardPage = () => {
   return (
     <div>
       <h1>Add New Card</h1>
-      <CardForm onSubmit={handleAddCard} totalCards={cards.length} />
+      <CardForm
+        onSubmit={handleAddCard}
+        initialData={{}}
+        totalCards={cards.length}
+        isEditing={false}
+      />
+      {""}
     </div>
   );
 };
