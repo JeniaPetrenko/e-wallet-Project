@@ -1,0 +1,61 @@
+/* styles/Header.module.css */
+
+.header {
+    background-color: #67ac7e;
+    /* Зелений фон */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Легка тінь */
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    /* Простір між лінками */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Центрування навігації */
+    padding: 0 20px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    /* Відстань між лінками */
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+    font-size: 1em;
+}
+
+.nav a {
+    text-decoration: none;
+    color: white;
+    /* Білий колір тексту */
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+    background-color: #d5e6d5;
+    /* Трохи темніший зелений при наведенні */
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .nav {
+        justify-content: center;
+    }
+
+    .nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        /* Менший відступ на маленьких екранах */
+    }
+}

@@ -1,0 +1,78 @@
+/*src/styles/Card.module.css*/
+/* Основний контейнер картки */
+.cardContainer {
+    padding: 20px;
+    max-width: 320px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Стиль при наведенні */
+.cardContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Активна картка */
+.activeCard {
+    border: 2px solid green;
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+/* Вендор картки (назва) */
+h3 {
+    font-size: 1.4rem;
+    margin: 0 0 8px;
+    color: #333;
+}
+
+/* Описові елементи */
+p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Кнопки */
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 8px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Стиль для кнопки видалення */
+button:nth-child(2) {
+    background-color: #dc3545;
+}
+
+/* Стиль при наведенні на кнопки */
+button:hover {
+    background-color: #0056b3;
+}
+
+button:nth-child(2):hover {
+    background-color: #c82333;
+}
+
+/* Контейнер для кнопок */
+.buttonContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+/* Стиль для неактивних карток (показувати кнопки) */
+.inactiveCardButtons {
+    display: flex;
+    gap: 10px;
+}

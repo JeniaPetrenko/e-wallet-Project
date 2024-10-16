@@ -1,5 +1,6 @@
 //src/redux/cardsSlic.js
-// Коментар: cardsSlice містить всю логіку для управління картками в Redux
+// cardsSlice містить всю логіку для управління картками
+// в Redux(додавання,видалення, активація, оновлення)
 
 import { createSlice } from "@reduxjs/toolkit";
 

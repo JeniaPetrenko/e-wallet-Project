@@ -1,11 +1,12 @@
 //src/pages/AddCardPage.js
-// Коментар: AddCardPage дозволяє додавати нову картку
+// AddCardPage сторінка для додавання нової картки
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addCard } from "../redux/cardsSlice";
 import CardForm from "../features/cards/CardForm";
+import styles from "../styles/AddCardPage.module.css"; // Імпорт стилів
 
 const AddCardPage = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const AddCardPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add New Card</h1>
+    <div className={styles.addCardContainer}>
+      <h1 className={styles.addCardTitle}>Add New Card</h1>
       <CardForm
         onSubmit={handleAddCard}
         initialData={{}}

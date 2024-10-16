@@ -1,10 +1,8 @@
-//src/features/cards/Card.jsx
-// Коментар: Card компонент для відображення окремої картки з можливістю активації та видалення
-
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeCard, setActiveCard } from "../../redux/cardsSlice";
 import { useNavigate } from "react-router-dom";
+import styles from "../../styles/Card.module.css"; // Імпорт стилів
 
 const Card = ({ card }) => {
   const dispatch = useDispatch();
@@ -19,16 +17,19 @@ const Card = ({ card }) => {
       case "amex":
         return { backgroundColor: "#006FCF", color: "white" };
       default:
-        return { backgroundColor: "#CCCCCC", color: "black" };
+        return { backgroundColor: "#CCCCCC" };
     }
   };
 
   const handleCardClick = () => {
     navigate(`/card/${card.id}`);
   };
+
   return (
     <div
-      className={`card ${card.isActive ? "active" : ""}`}
+      className={`${styles.cardContainer} ${
+        card.isActive ? styles.activeCard : ""
+      }`}
       style={getCardStyle()}
       onClick={handleCardClick}
     >
@@ -38,8 +39,12 @@ const Card = ({ card }) => {
       <p>
         Expire: {card.expireMonth}/{card.expireYear}
       </p>
+
       {!card.isActive && (
-        <div onClick={(e) => e.stopPropagation()}>
+        <div
+          className={styles.buttonContainer}
+          onClick={(e) => e.stopPropagation()}
+        >
           <button onClick={() => dispatch(setActiveCard(card.id))}>
             Set Active
           </button>

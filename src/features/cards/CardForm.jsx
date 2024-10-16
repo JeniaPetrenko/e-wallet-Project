@@ -1,11 +1,13 @@
 // src/features/cards/CardForm.jsx
 // Коментар: CardForm компонент для додавання та редагування карток з валідацією
+//номер, імʼя, etc
 import React, { useState, useEffect } from "react";
 import {
   validateCardNumber,
   validateExpiryDate,
   validateCardholderName,
 } from "../../utils/validation";
+import styles from "../../styles/CardForm.module.css";
 
 const CardForm = ({
   onSubmit,
@@ -86,7 +88,7 @@ const CardForm = ({
 
   return (
     <div>
-      <div className="card-preview" style={getCardStyle()}>
+      <div className={styles.cardPreview} style={getCardStyle()}>
         <h3>{cardData.vendor || "Card Vendor"}</h3>
         <p>
           {cardData.cardNumber
@@ -99,7 +101,7 @@ const CardForm = ({
         }`}</p>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
         <select
           name="vendor"
           value={cardData.vendor || ""}
@@ -111,7 +113,7 @@ const CardForm = ({
           <option value="mastercard">Mastercard</option>
           <option value="amex">American Express</option>
         </select>
-        {errors.vendor && <p className="error">{errors.vendor}</p>}
+        {errors.vendor && <p className={styles.error}>{errors.vendor}</p>}
 
         <input
           type="text"
@@ -122,7 +124,9 @@ const CardForm = ({
           maxLength="16"
           required
         />
-        {errors.cardNumber && <p className="error">{errors.cardNumber}</p>}
+        {errors.cardNumber && (
+          <p className={styles.error}>{errors.cardNumber}</p>
+        )}
 
         <input
           type="text"
@@ -133,7 +137,7 @@ const CardForm = ({
           required
         />
         {errors.cardholderName && (
-          <p className="error">{errors.cardholderName}</p>
+          <p className={styles.error}>{errors.cardholderName}</p>
         )}
 
         <select
@@ -166,7 +170,7 @@ const CardForm = ({
             </option>
           ))}
         </select>
-        {errors.expire && <p className="error">{errors.expire}</p>}
+        {errors.expire && <p className={styles.error}>{errors.expire}</p>}
 
         <input
           type="text"
@@ -177,7 +181,7 @@ const CardForm = ({
           maxLength="3"
           required
         />
-        {errors.cvv && <p className="error">{errors.cvv}</p>}
+        {errors.cvv && <p className={styles.error}>{errors.cvv}</p>}
 
         <button type="submit">{isEditing ? "Update Card" : "Add Card"}</button>
       </form>

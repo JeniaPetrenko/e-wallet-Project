@@ -1,5 +1,6 @@
 //src/pages/CardDetailsPage.jsx
-// Коментар: CardDetailsPage відображає деталі картки, дозволяє її редагувати, активувати або видалити
+// CardDetailsPage відображає деталі картки,
+// дозволяє її редагуват  або видалити
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";

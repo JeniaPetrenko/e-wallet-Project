@@ -1,0 +1,55 @@
+/* HomePage.module.css */
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100%;
+    flex-direction: column;
+    background-color: #f5f5f5;
+}
+
+.homeCardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+}
+
+.homeTitle {
+    font-size: 2rem;
+    /* Розмір заголовка */
+    margin-bottom: 20px;
+    color: black;
+}
+
+.addButton {
+    padding: 10px 20px;
+    /* Внутрішні відступи для кнопки */
+    font-size: 1rem;
+    /* Розмір шрифту кнопки */
+    background-color: #007bff;
+    /* Колір фону кнопки */
+    color: white;
+    /* Колір тексту кнопки */
+    border: none;
+    /* Без рамки */
+    border-radius: 5px;
+    /* Закруглені кути */
+    cursor: pointer;
+    /* Курсор у вигляді руки при наведенні */
+    transition: background-color 0.3s ease;
+    /* Плавний перехід кольору фону */
+}
+
+.addButton:hover {
+    background-color: #0056b3;
+    /* Темніший відтінок при наведенні */
+}
