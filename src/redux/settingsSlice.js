@@ -16,6 +16,6 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { setTheme, deleteInactiveCards } = settingsSlice.actions;
+export const { setTheme } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

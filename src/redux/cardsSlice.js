@@ -19,14 +19,21 @@ const cardsSlice = createSlice({
         });
       }
     },
-    removeCard: (state, action) => {
-      state.cards = state.cards.filter((card) => card.id !== action.payload);
-    },
     setActiveCard: (state, action) => {
-      state.cards = state.cards.map((card) => ({
-        ...card,
-        isActive: card.id === action.payload,
-      }));
+      const cardToToggle = state.cards.find(
+        (card) => card.id === action.payload
+      );
+      if (cardToToggle) {
+        // Якщо картка вже активна, деактивуємо її
+        if (cardToToggle.isActive) {
+          cardToToggle.isActive = false;
+        } else {
+          // Якщо картка неактивна, деактивуємо всі інші картки і активуємо цю
+          state.cards.forEach((card) => {
+            card.isActive = card.id === action.payload;
+          });
+        }
+      }
     },
     updateCard: (state, action) => {
       const index = state.cards.findIndex(
@@ -42,12 +49,7 @@ const cardsSlice = createSlice({
   },
 });
 
-export const {
-  addCard,
-  removeCard,
-  setActiveCard,
-  updateCard,
-  deleteInactiveCards,
-} = cardsSlice.actions;
+export const { addCard, setActiveCard, updateCard, deleteInactiveCards } =
+  cardsSlice.actions;
 
 export default cardsSlice.reducer;

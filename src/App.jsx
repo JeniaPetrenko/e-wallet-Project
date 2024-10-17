@@ -1,5 +1,6 @@
 // src/App.jsx
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddCardPage from "./pages/AddCardPage";
@@ -7,10 +8,14 @@ import CardDetailsPage from "./pages/CardDetailsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Header from "./components/Header"; // Імпортуємо Header компонент
 import "./styles/themes.css";
-import { useSelector } from "react-redux";
 
 function App() {
   const theme = useSelector((state) => state.settings.theme);
+
+  useEffect(() => {
+    document.documentElement.className = `theme-${theme}`; // Додаємо активну тему у документ
+  }, [theme]);
+
   return (
     <div className={`App theme-${theme}`}>
       {" "}

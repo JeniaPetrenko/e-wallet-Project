@@ -1,10 +1,10 @@
 //src/pages/CardDetailsPage.jsx
 // CardDetailsPage відображає деталі картки,
 // дозволяє її редагуват  або видалити
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { removeCard, setActiveCard, updateCard } from "../redux/cardsSlice";
+import { setActiveCard, updateCard } from "../redux/cardsSlice";
 import CardForm from "../features/cards/CardForm";
 
 const CardDetailsPage = () => {
@@ -19,14 +19,8 @@ const CardDetailsPage = () => {
   if (!card) {
     return <h1>Card not found</h1>;
   }
-  const handleDelete = () => {
-    if (!card.isActive) {
-      dispatch(removeCard(card.id));
-      navigate("/");
-    }
-  };
 
-  const handleActivate = () => {
+  const handleToggleActive = () => {
     dispatch(setActiveCard(card.id));
   };
 
@@ -74,7 +68,9 @@ const CardDetailsPage = () => {
       {!card.isActive && (
         <div>
           {!isEditing && <button onClick={handleEdit}>Edit Card</button>}
-          <button onClick={handleActivate}>Activate Card</button>
+          <button onClick={handleToggleActive}>
+            {card.isActive ? "Deactivate Card" : "Activate Card"}
+          </button>
           <button onClick={handleDelete}>Delete Card</button>
         </div>
       )}

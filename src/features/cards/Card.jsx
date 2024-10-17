@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeCard, setActiveCard } from "../../redux/cardsSlice";
+import { setActiveCard } from "../../redux/cardsSlice";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/Card.module.css"; // Імпорт стилів
 
@@ -25,6 +25,10 @@ const Card = ({ card }) => {
     navigate(`/card/${card.id}`);
   };
 
+  const handleToggleActive = () => {
+    dispatch(setActiveCard(card.id));
+  };
+
   return (
     <div
       className={`${styles.cardContainer} ${
@@ -39,18 +43,9 @@ const Card = ({ card }) => {
       <p>
         Expire: {card.expireMonth}/{card.expireYear}
       </p>
-
-      {!card.isActive && (
-        <div
-          className={styles.buttonContainer}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button onClick={() => dispatch(setActiveCard(card.id))}>
-            Set Active
-          </button>
-          <button onClick={() => dispatch(removeCard(card.id))}>Remove</button>
-        </div>
-      )}
+      <button onClick={handleToggleActive}>
+        {card.isActive ? "Deactivate" : "Activate"}
+      </button>
     </div>
   );
 };

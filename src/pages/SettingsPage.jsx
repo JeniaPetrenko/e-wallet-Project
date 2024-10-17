@@ -1,23 +1,28 @@
 //src/pages/SettingsPags.jsx
-import React from "react";
-import styles from "../styles/SettingsPage.module.css"; // Імпорт стилів
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../redux/settingsSlice"; // Імпортуємо тільки зміну теми
-import { deleteInactiveCards as removeCardsFromRedux } from "../redux/cardsSlice"; // Перейменовуємо імпорт, щоб уникнути конфлікту
+import { deleteInactiveCards } from "../redux/cardsSlice"; // ��мпортуємо зміну всіх картокmport { dele } from "../redux/cardsSlice"; // ��мпортуємо зміну всіх карток
 
 const SettingsPage = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.settings.theme); // Отримуємо поточну тему з Redux
-  const inactiveCards = useSelector((state) =>
-    state.cards.cards.filter((card) => !card.isActive)
-  ); // Отримуємо всі неактивні картки
+  const cards = useSelector((state) => state.cards.cards); // Отримуємо всі картки
+  const inactiveCards = cards.filter((card) => !card.isActive); // Отримуємо всі неактивні картки
+
+  useEffect(() => {
+    console.log("Current theme: " + theme);
+  }, [theme]);
 
   const handleThemeChange = (event) => {
-    dispatch(setTheme(event.target.value)); // Зміна теми
+    const newTheme = event.target.value;
+    console.log("Changing theme to: " + newTheme); // Виводимо нову тему у консольку
+    dispatch(setTheme(newTheme)); // Зміна теми
   };
 
-  const handleDeleteInactive = () => {
-    dispatch(removeCardsFromRedux()); // Використовуємо перейменовану дію для видалення карток
+  const handleDeleteInactiveCards = () => {
+    console.log("Deleting all inactive cards"); // Виводимо повідомлення у консоль
+    dispatch(deleteInactiveCards()); // Використовуємо перейменовану дію для видалення карток
   };
 
   return (
@@ -36,7 +41,7 @@ const SettingsPage = () => {
       <div className="inactive-cards">
         <h2>Inactive Cards</h2>
         {inactiveCards.length > 0 ? (
-          <button onClick={handleDeleteInactive}>
+          <button onClick={handleDeleteInactiveCards}>
             Delete All Inactive Cards
           </button>
         ) : (
