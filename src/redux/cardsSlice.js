@@ -40,7 +40,7 @@ const cardsSlice = createSlice({
         (card) => card.id === action.payload.id
       );
       if (index !== -1) {
-        state[index] = { ...state[index], ...action.payload };
+        state.cards[index] = { ...state.cards[index], ...action.payload };
       }
     },
     deleteInactiveCards: (state) => {

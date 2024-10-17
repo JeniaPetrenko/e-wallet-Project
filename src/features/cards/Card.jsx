@@ -1,3 +1,4 @@
+//src/features/cards/Card.jsx
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setActiveCard } from "../../redux/cardsSlice";
@@ -25,9 +26,9 @@ const Card = ({ card }) => {
     navigate(`/card/${card.id}`);
   };
 
-  const handleToggleActive = () => {
-    dispatch(setActiveCard(card.id));
-  };
+  // const handleToggleActive = () => {
+  //   dispatch(setActiveCard(card.id));
+  // };
 
   return (
     <div
@@ -43,9 +44,9 @@ const Card = ({ card }) => {
       <p>
         Expire: {card.expireMonth}/{card.expireYear}
       </p>
-      <button onClick={handleToggleActive}>
+      {/* <button onClick={handleToggleActive}>
         {card.isActive ? "Deactivate" : "Activate"}
-      </button>
+      </button> */}
     </div>
   );
 };

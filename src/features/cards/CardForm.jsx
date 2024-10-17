@@ -8,6 +8,7 @@ import {
   validateCardholderName,
 } from "../../utils/validation";
 import styles from "../../styles/CardForm.module.css";
+import CardPreview from "./CardPreview";
 
 const CardForm = ({
   onSubmit,
@@ -73,33 +74,9 @@ const CardForm = ({
     }
   };
 
-  const getCardStyle = () => {
-    switch (cardData.vendor) {
-      case "visa":
-        return { backgroundColor: "#1A1F71", color: "white" };
-      case "mastercard":
-        return { backgroundColor: "#EB001B", color: "white" };
-      case "amex":
-        return { backgroundColor: "#006FCF", color: "white" };
-      default:
-        return { backgroundColor: "#CCCCCC", color: "black" };
-    }
-  };
-
   return (
     <div>
-      <div className={styles.cardPreview} style={getCardStyle()}>
-        <h3>{cardData.vendor || "Card Vendor"}</h3>
-        <p>
-          {cardData.cardNumber
-            ? `**** **** **** ${cardData.cardNumber.slice(-4)}`
-            : "**** **** **** ****"}
-        </p>
-        <p>{cardData.cardholderName || "Cardholder Name"}</p>
-        <p>{`${cardData.expireMonth || "MM"}/${
-          cardData.expireYear || "YY"
-        }`}</p>
-      </div>
+      <CardPreview cardData={cardData} />
 
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <select
@@ -190,10 +167,3 @@ const CardForm = ({
 };
 
 export default CardForm;
-
-// Виправлення та зауваження:
-// 1. Видалено дублікати полів вводу для cardNumber.
-// 2. Виправлено placeholder для поля cardNumber.
-// 3. Додано || "" для всіх value атрибутів, щоб уникнути помилок з undefined.
-// 4. Змінено повідомлення про помилку для expiry date.
-// 5. Видалено непотрібні id атрибути з input полів

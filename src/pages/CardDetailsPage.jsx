@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { setActiveCard, updateCard } from "../redux/cardsSlice";
 import CardForm from "../features/cards/CardForm";
+import CardPreview from "../features/cards/CardPreview";
 
 const CardDetailsPage = () => {
   const { id } = useParams();
@@ -28,55 +29,37 @@ const CardDetailsPage = () => {
     dispatch(updateCard({ id: card.id, ...updatedData }));
     setIsEditing(false);
   };
+
   const handleEdit = () => {
     if (!card.isActive) {
       setIsEditing(true);
     }
   };
 
-  const cardStyle = {
-    backgroundColor:
-      card.vendor === "visa"
-        ? "#1A1F71"
-        : card.vendor === "mastercard"
-        ? "#EB001B"
-        : card.vendor === "amex"
-        ? "#006FCF"
-        : "#CCCCCC",
-    color: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    marginBottom: "20px",
-  };
-
   return (
     <div>
       <h2>Card Details</h2>
+      <div>
+        <button onClick={handleToggleActive}>
+          {card.isActive ? "Deactivate Card" : "Activate Card"}
+        </button>
+      </div>
+
       {!isEditing ? (
-        <div style={cardStyle}>
-          <h3>{card.vendor}</h3>
-          <p>Card Number: **** **** **** {card.cardNumber.slice(-4)}</p>
-          <p>Cardholder: {card.cardholderName}</p>
-          <p>
-            Expiry: {card.expireMonth}/{card.expireYear}
-          </p>
-          <p>CVV: ***</p>
-        </div>
+        <CardPreview cardData={card} />
       ) : (
         <CardForm initialData={card} onSubmit={handleUpdate} />
       )}
       {!card.isActive && (
         <div>
           {!isEditing && <button onClick={handleEdit}>Edit Card</button>}
-          <button onClick={handleToggleActive}>
-            {card.isActive ? "Deactivate Card" : "Activate Card"}
+
+          <button onClick={() => dispatch(setActiveCard(card.id))}>
+            Delete Card
           </button>
-          <button onClick={handleDelete}>Delete Card</button>
         </div>
       )}
-      {card.isActive && (
-        <p>This card is active. Editing and deletion are not allowed.</p>
-      )}
+      {card.isActive && <p>This card is active. Editing is not allowed.</p>}
     </div>
   );
 };
