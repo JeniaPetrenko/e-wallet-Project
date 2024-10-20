@@ -88,10 +88,10 @@ const CardForm = ({
           <option value="">Select vendor</option>
           <option value="visa">Visa</option>
           <option value="mastercard">Mastercard</option>
+          <option value="maestro">Maestro</option>
           <option value="amex">American Express</option>
         </select>
         {errors.vendor && <p className={styles.error}>{errors.vendor}</p>}
-
         <input
           type="text"
           name="cardNumber"
@@ -104,7 +104,6 @@ const CardForm = ({
         {errors.cardNumber && (
           <p className={styles.error}>{errors.cardNumber}</p>
         )}
-
         <input
           type="text"
           name="cardholderName"
@@ -116,7 +115,6 @@ const CardForm = ({
         {errors.cardholderName && (
           <p className={styles.error}>{errors.cardholderName}</p>
         )}
-
         <select
           name="expireMonth"
           value={cardData.expireMonth || ""}
@@ -130,7 +128,6 @@ const CardForm = ({
             </option>
           ))}
         </select>
-
         <select
           name="expireYear"
           value={cardData.expireYear || ""}
@@ -148,19 +145,17 @@ const CardForm = ({
           ))}
         </select>
         {errors.expire && <p className={styles.error}>{errors.expire}</p>}
-
         <input
           type="text"
           name="cvv"
           value={cardData.cvv || ""}
           onChange={handleChange}
-          placeholder="CVV"
+          placeholder="cvv"
           maxLength="3"
           required
         />
         {errors.cvv && <p className={styles.error}>{errors.cvv}</p>}
-
-        <button type="submit">{isEditing ? "Update Card" : "Add Card"}</button>
+        <button type="submit">{isEditing ? "Save Changes" : "Add Card"}</button>
       </form>
     </div>
   );

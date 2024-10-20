@@ -1,0 +1,40 @@
+/* Common.module.css */
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Виправлено з place-items на align-items */
+    width: 100%;
+    max-width: 320px;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+}
+
+.pageTitle {
+    margin-bottom: 20px;
+    /* Відстань між заголовком та контентом */
+    text-align: center;
+    /* Центрування заголовка */
+}
+
+button {
+    margin-top: 10px;
+    /* Відстань між кнопками */
+    padding: 10px 20px;
+    /* Внутрішні відступи для кнопок */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #1d92ea;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #155a8a;
+}

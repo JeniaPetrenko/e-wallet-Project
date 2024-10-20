@@ -1,78 +1,54 @@
 /*src/styles/Card.module.css*/
-/* Основний контейнер картки */
+
+/* The main view of cards: homePage, */
 .cardContainer {
     padding: 20px;
     max-width: 320px;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 16px;
     background-color: #f4f4f4;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
+    background-image: linear-gradient(45deg, rgba(224, 224, 224, 0.3) 25%, transparent 25%, transparent 75%, rgba(224, 224, 224, 0.3) 75%);
 }
 
-/* Стиль при наведенні */
 .cardContainer:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Активна картка */
-.activeCard {
-    border: 2px solid green;
-    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+.cardLogoContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+}
+
+.cardLogo {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Вендор картки (назва) */
-h3 {
+.cardTitle {
+    /* Змінив h3 на клас */
     font-size: 1.4rem;
     margin: 0 0 8px;
     color: #333;
 }
 
 /* Описові елементи */
-p {
+.cardDescription {
+    /* Змінив p на клас */
     margin: 4px 0;
     font-size: 1rem;
-    color: #666;
+    color: #494848;
 }
 
-/* Кнопки */
-button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    margin-right: 8px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-/* Стиль для кнопки видалення */
-button:nth-child(2) {
-    background-color: #dc3545;
-}
-
-/* Стиль при наведенні на кнопки */
-button:hover {
-    background-color: #0056b3;
-}
-
-button:nth-child(2):hover {
-    background-color: #c82333;
-}
-
-/* Контейнер для кнопок */
-.buttonContainer {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-}
-
-/* Стиль для неактивних карток (показувати кнопки) */
-.inactiveCardButtons {
-    display: flex;
-    gap: 10px;
+/* Активна картка */
+.activeCard {
+    border: 2px solid green;
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
 }

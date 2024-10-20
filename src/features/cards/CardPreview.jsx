@@ -6,11 +6,14 @@ const CardPreview = ({ cardData }) => {
   const getCardStyle = () => {
     switch (cardData.vendor) {
       case "visa":
-        return { backgroundColor: "#1A1F71", color: "white" };
+        return { backgroundColor: "#1d92ea", color: "white" };
       case "mastercard":
-        return { backgroundColor: "#EB001B", color: "white" };
+        return { backgroundColor: "#bd7b83", color: "white" };
       case "amex":
-        return { backgroundColor: "#006FCF", color: "white" };
+        return { backgroundColor: "#bf8952", color: "white" };
+      case "maestro":
+        return { backgroundColor: "#b275ce", color: "white" };
+      case "discover":
       default:
         return { backgroundColor: "#CCCCCC", color: "black" };
     }
@@ -26,6 +29,7 @@ const CardPreview = ({ cardData }) => {
       </p>
       <p>{cardData.cardholderName || "Cardholder Name"}</p>
       <p>{`${cardData.expireMonth || "MM"}/${cardData.expireYear || "YY"}`}</p>
+      <p>{cardData.cvv || "cvv"}</p>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../redux/settingsSlice"; // Імпортуємо тільки зміну теми
 import { deleteInactiveCards } from "../redux/cardsSlice"; // ��мпортуємо зміну всіх картокmport { dele } from "../redux/cardsSlice"; // ��мпортуємо зміну всіх карток
+import styles from "../styles/SettingsPage.module.css"; // Імпортуємо стилі
 
 const SettingsPage = () => {
   const dispatch = useDispatch();
@@ -26,10 +27,10 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className={`settings-page ${theme}`}>
-      <h1>Settings</h1>
+    <div className={`${styles.settingsContainer} theme-${theme}`}>
+      <h1 className={styles.settingsTitle}>Settings</h1>
 
-      <div className="theme-selector">
+      <div className={styles.themeSelector}>
         <label>Choose Theme:</label>
         <select value={theme} onChange={handleThemeChange}>
           <option value="light">Light</option>
@@ -38,7 +39,7 @@ const SettingsPage = () => {
         </select>
       </div>
 
-      <div className="inactive-cards">
+      <div className={styles.inactiveCards}>
         <h2>Inactive Cards</h2>
         {inactiveCards.length > 0 ? (
           <button onClick={handleDeleteInactiveCards}>

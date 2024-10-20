@@ -1,32 +1,17 @@
-/* src/styles/AddCardPage.module.css */
+/* Стилізація для AddCardPage */
 
-body {
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
-    flex-direction: column;
-    background-color: #f5f5f5;
-}
-
-.addCardContainer {
+/* .addCardContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    place-items: center;
-    width: 100%;
+    align-items: center;
+    /* Виправлено з place-items на align-items */
+/* width: 100%;
     max-width: 320px;
     margin-top: 60px;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: white;
     border-radius: 8px;
-}
-
-.addCardTitle {
-    text-align: center;
-    /* Вирівнювання заголовка по центру */
-    color: #333;
-    /* Темно-сірий колір */
-}
+} */
+/* */

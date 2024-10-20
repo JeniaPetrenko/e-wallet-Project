@@ -4,9 +4,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { setActiveCard, updateCard } from "../redux/cardsSlice";
+import { setActiveCard, updateCard, deleteCard } from "../redux/cardsSlice";
 import CardForm from "../features/cards/CardForm";
 import CardPreview from "../features/cards/CardPreview";
+import commonStyles from "../styles/Common.module.css"; // Імпорт спільних стилів
 
 const CardDetailsPage = () => {
   const { id } = useParams();
@@ -35,10 +36,17 @@ const CardDetailsPage = () => {
       setIsEditing(true);
     }
   };
+  const handleCancelEdit = () => {
+    setIsEditing(false); // Повернення до режиму перегляду без збереження
+  };
+  const handleDelete = () => {
+    dispatch(deleteCard(card.id));
+    navigate("/"); // Переходимо на головну сторінку після видалення
+  };
 
   return (
-    <div>
-      <h2>Card Details</h2>
+    <div className={commonStyles.pageContainer}>
+      <h2 className={commonStyles.pageTitle}>Card Details</h2>
       <div>
         <button onClick={handleToggleActive}>
           {card.isActive ? "Deactivate Card" : "Activate Card"}
@@ -48,15 +56,22 @@ const CardDetailsPage = () => {
       {!isEditing ? (
         <CardPreview cardData={card} />
       ) : (
-        <CardForm initialData={card} onSubmit={handleUpdate} />
+        <div>
+          <p>Editing card...</p> {/* Повідомлення про редагування */}
+          <CardForm
+            initialData={card}
+            onSubmit={handleUpdate}
+            isEditing={true}
+          />
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </div>
       )}
+
       {!card.isActive && (
         <div>
           {!isEditing && <button onClick={handleEdit}>Edit Card</button>}
 
-          <button onClick={() => dispatch(setActiveCard(card.id))}>
-            Delete Card
-          </button>
+          <button onClick={handleDelete}>Delete Card</button>
         </div>
       )}
       {card.isActive && <p>This card is active. Editing is not allowed.</p>}

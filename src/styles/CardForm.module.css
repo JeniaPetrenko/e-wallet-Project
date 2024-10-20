@@ -1,32 +1,34 @@
 /* src/styles/CardForm.module.css */
+/*Card Details Page*/
 
-.formContainer {
+/* .formContainer {
     max-width: 320px;
     margin: auto;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-}
+} */
 
 .cardPreview {
     padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    color: white;
+    width: 255px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: #f4f4f4;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    background-image: linear-gradient(45deg, rgba(224, 224, 224, 0.3) 25%, transparent 25%, transparent 75%, rgba(224, 224, 224, 0.3) 75%);
 }
 
-.cardPreview h3 {
+/* .cardPreview h3 {
     margin: 0;
     font-size: 1.5em;
-}
+} */
 
-.cardPreview p {
-    margin: 5px 0;
-    font-size: 1.2em;
-}
+
 
 .error {
     color: #ff4d4d;
@@ -41,39 +43,19 @@ select {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    /* Сіра рамка */
     border-radius: 5px;
-    /* Закруглені кути */
     font-size: 1em;
-    /* Розмір шрифту */
     box-sizing: border-box;
-    /* Додаємо box-sizing */
 }
 
-/* Стилі для кнопки */
-button {
-    width: 100%;
-    /* Ширина кнопки на всю ширину контейнера */
-    padding: 10px;
-    /* Внутрішні відступи */
-    border: none;
-    /* Без рамки */
-    border-radius: 5px;
-    /* Закруглені кути */
-    background-color: #007bff;
-    /* Синій колір кнопки */
-    color: white;
-    /* Білий колір тексту кнопки */
-    font-size: 1em;
-    /* Розмір шрифту */
-    cursor: pointer;
-    /* Курсор для вказування на кнопку */
-    transition: background-color 0.3s;
-    /* Анімація при наведенні */
+h3 {
+    font-size: 1.4rem;
+    margin: 0 0 8px;
+    color: #333;
 }
 
-/* Зміна кольору кнопки при наведенні */
-button:hover {
-    background-color: #0056b3;
-    /* Темніший синій колір при наведенні */
+p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: #494848;
 }

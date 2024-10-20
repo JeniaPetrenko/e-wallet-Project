@@ -6,30 +6,28 @@ import HomePage from "./pages/HomePage";
 import AddCardPage from "./pages/AddCardPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
 import SettingsPage from "./pages/SettingsPage";
-import Header from "./components/Header"; // Імпортуємо Header компонент
+import Header from "./components/Header";
 import "./styles/themes.css";
 
 function App() {
   const theme = useSelector((state) => state.settings.theme);
 
   useEffect(() => {
-    document.documentElement.className = `theme-${theme}`; // Додаємо активну тему у документ
+    document.body.className = `theme-${theme}`;
   }, [theme]);
 
   return (
-    <div className={`App theme-${theme}`}>
-      {" "}
-      {/* Додаємо клас теми */}
-      <Router>
-        <Header /> {/* Вставляємо компонент Header */}
+    <Router>
+      <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/add-card" element={<AddCardPage />} />
           <Route path="/card/:id" element={<CardDetailsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
-      </Router>{" "}
-    </div>
+      </div>
+    </Router>
   );
 }
 
