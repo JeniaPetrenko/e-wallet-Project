@@ -1,17 +1,14 @@
 /* Common.module.css */
-
+/* container for all pages */
 .pageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* Виправлено з place-items на align-items */
     width: 100%;
-    max-width: 320px;
-    margin-top: 20px;
+    max-width: 360px;
+    min-width: 320px;
     padding: 20px;
+    margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    background-color: var(--container-bg, white);
+    color: var(--text-color, black);
     border-radius: 8px;
 }
 
@@ -24,9 +21,7 @@
 
 button {
     margin-top: 10px;
-    /* Відстань між кнопками */
     padding: 10px 20px;
-    /* Внутрішні відступи для кнопок */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -37,4 +32,30 @@ button {
 
 button:hover {
     background-color: #155a8a;
+}
+
+/* Візуальні зміни для планшетів (від 768px) */
+@media (min-width: 768px) {
+    .pageContainer {
+        max-width: 720px;
+        /* Розширюємо контейнер для планшетів */
+        padding: 30px;
+    }
+}
+
+/* Візуальні зміни для десктопів (від 1024px) */
+@media (min-width: 1024px) {
+    .pageContainer {
+        max-width: 960px;
+        /* Більша ширина для десктопів */
+        padding: 40px;
+    }
+}
+
+/* Візуальні зміни для великих екранів (від 1440px) */
+@media (min-width: 1440px) {
+    .pageContainer {
+        max-width: 1200px;
+        /* Максимальний розмір для великих екранів */
+    }
 }

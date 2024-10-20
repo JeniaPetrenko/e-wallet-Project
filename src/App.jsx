@@ -7,7 +7,6 @@ import AddCardPage from "./pages/AddCardPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Header from "./components/Header";
-import "./styles/themes.css";
 
 function App() {
   const theme = useSelector((state) => state.settings.theme);

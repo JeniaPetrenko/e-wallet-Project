@@ -1,20 +1,12 @@
 /* src/styles/CardForm.module.css */
-/*Card Details Page*/
-
-/* .formContainer {
-    max-width: 320px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-} */
+/*Card Details Page, Editing card page, add card*/
 
 .cardPreview {
     padding: 20px;
-    width: 255px;
+    width: 320px;
     border-radius: 12px;
     margin-bottom: 16px;
+    margin-top: 16px;
     background-color: #f4f4f4;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -22,12 +14,6 @@
     position: relative;
     background-image: linear-gradient(45deg, rgba(224, 224, 224, 0.3) 25%, transparent 25%, transparent 75%, rgba(224, 224, 224, 0.3) 75%);
 }
-
-/* .cardPreview h3 {
-    margin: 0;
-    font-size: 1.5em;
-} */
-
 
 
 .error {

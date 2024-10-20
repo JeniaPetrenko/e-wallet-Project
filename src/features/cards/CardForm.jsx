@@ -1,5 +1,5 @@
 // src/features/cards/CardForm.jsx
-// Коментар: CardForm компонент для додавання та редагування карток з валідацією
+// CardForm компонент для додавання та редагування карток з валідацією
 //номер, імʼя, etc
 import React, { useState, useEffect } from "react";
 import {
@@ -11,8 +11,8 @@ import styles from "../../styles/CardForm.module.css";
 import CardPreview from "./CardPreview";
 
 const CardForm = ({
-  onSubmit,
-  initialData = {},
+  onSubmit, // Функція, яка викликається при поданні форми- для обробки відправки форми
+  initialData = {}, // Початкові дані для форми, для редагування
   totalCards,
   isEditing = false,
 }) => {
@@ -20,6 +20,7 @@ const CardForm = ({
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    //оновлює дані картки, якщо вони змінились
     if (isEditing) {
       setCardData(initialData);
     }
