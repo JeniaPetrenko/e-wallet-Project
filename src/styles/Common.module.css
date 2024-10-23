@@ -25,9 +25,9 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #1d92ea;
-    color: white;
     font-weight: bold;
+
+
 }
 
 button:hover {
@@ -40,6 +40,7 @@ button:hover {
         max-width: 720px;
         /* Розширюємо контейнер для планшетів */
         padding: 30px;
+
     }
 }
 

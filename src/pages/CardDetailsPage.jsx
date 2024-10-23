@@ -51,6 +51,14 @@ const CardDetailsPage = () => {
         <button onClick={handleToggleActive}>
           {card.isActive ? "Deactivate Card" : "Activate Card"}
         </button>
+        {!card.isActive && (
+          <div>
+            {!isEditing && <button onClick={handleEdit}>Edit Card</button>}
+
+            <button onClick={handleDelete}>Delete Card</button>
+          </div>
+        )}
+        {card.isActive && <p>This card is active. Editing is not allowed.</p>}
       </div>
 
       {!isEditing ? (
@@ -66,15 +74,6 @@ const CardDetailsPage = () => {
           <button onClick={handleCancelEdit}>Cancel</button>
         </div>
       )}
-
-      {!card.isActive && (
-        <div>
-          {!isEditing && <button onClick={handleEdit}>Edit Card</button>}
-
-          <button onClick={handleDelete}>Delete Card</button>
-        </div>
-      )}
-      {card.isActive && <p>This card is active. Editing is not allowed.</p>}
     </div>
   );
 };

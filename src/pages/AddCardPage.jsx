@@ -18,6 +18,7 @@ const AddCardPage = () => {
       console.log("The card has been added", cardData);
       navigate("/");
     } else {
+      alert("You can't add more than 4 cards.");
       console.log("You can't add more than 4 cards.");
     }
   };

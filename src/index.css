@@ -1,13 +1,13 @@
 /* src/index.css
  */
-/* Base theme (light) */
 :root {
+  --header-bg: linear-gradient(90deg, #a8e6cf, #b3b3b3);
   --background-color: white;
   --text-color: black;
   --container-bg: #f0f0f0;
-  --button-bg: #1d92ea;
+  --button-bg: #82c78a;
   --button-text: white;
-  --button-hover-bg: #155a8a;
+  --button-hover-bg: #85b98b;
   --card-bg: #f4f4f4;
   --card-gradient-color: 224, 224, 224;
   --card-title-color: #333;
@@ -18,19 +18,22 @@
 
 /* Light theme */
 .theme-light {
+  --header-bg: linear-gradient(90deg, #a8e6cf, #b3b3b3);
   --background-color: white;
   --text-color: black;
   --container-bg: #f0f0f0;
-  --button-bg: #1d92ea;
+  --button-bg: #82c78a;
   --button-text: white;
-  --button-hover-bg: #155a8a;
+  --button-hover-bg: #33c444;
 }
 
 /* Dark theme */
 .theme-dark {
-  --background-color: #333;
+  /* Варіант градієнта з синіми відтінками */
+  --header-bg: linear-gradient(90deg, #696969, #a9a9a9);
+  --background-color: #6b6b6b;
   --text-color: #fff;
-  --container-bg: #1a1a1a;
+  --container-bg: #a4a4a4;
   --button-bg: #4a4a4a;
   --button-text: #fff;
   --button-hover-bg: #5a5a5a;
@@ -44,9 +47,10 @@
 
 /* Green theme */
 .theme-green {
+  --header-bg: linear-gradient(90deg, #e6ffe6, #9bd6c4);
   --background-color: #e6ffe6;
   --text-color: #006400;
-  --container-bg: #90b991;
+  --container-bg: #9bd6c4;
   --button-bg: #2a6e2a;
   --button-text: white;
   --button-hover-bg: #1e4e1e;
@@ -65,6 +69,16 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Styles for header */
+.header {
+  background: var(--header-bg);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Styles for pageContainer */
 .pageContainer {
   background-color: var(--container-bg);
@@ -81,19 +95,4 @@ button {
 
 button:hover {
   background-color: var(--button-hover-bg);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
 }

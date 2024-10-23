@@ -61,6 +61,7 @@ const CardForm = ({
     if (totalCards >= 4 && !isEditing) {
       newErrors.cardLimit = "Maximum 4 cards allowed";
       console.log("Card limit reached. Total cards: " + totalCards);
+      alert("Card limit reached. Maximum 4 cards allowed");
     }
 
     if (Object.keys(newErrors).length === 0) {
