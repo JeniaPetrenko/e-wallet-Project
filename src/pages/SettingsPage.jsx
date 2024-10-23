@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../redux/settingsSlice";
 import { deleteInactiveCards } from "../redux/cardsSlice";
 import commonStyles from "../styles/Common.module.css";
-import styles from "../styles/SettingsPage.module.css"; // Додайте цей рядок
 
 const SettingsPage = () => {
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const SettingsPage = () => {
     <div className={`${commonStyles.pageContainer} theme-${theme}`}>
       <h1 className={commonStyles.pageTitle}>Settings</h1>
 
-      <div className={styles.themeSelector}>
+      <div>
         <label>Choose Theme:</label>
         <select value={theme} onChange={handleThemeChange}>
           <option value="light">Light</option>
@@ -39,8 +38,7 @@ const SettingsPage = () => {
         </select>
       </div>
 
-      <div className={styles.inactiveCards}>
-        <h2>Inactive Cards</h2>
+      <div>
         {inactiveCards.length > 0 ? (
           <button onClick={handleDeleteInactiveCards}>
             Delete All Inactive Cards
