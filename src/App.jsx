@@ -1,12 +1,13 @@
 // src/App.jsx
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddCardPage from "./pages/AddCardPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Header from "./components/Header";
+import { store } from "./redux/store"; // Імпортуйте store
 
 function App() {
   const theme = useSelector((state) => state.settings.theme);
@@ -16,17 +17,20 @@ function App() {
   }, [theme]);
 
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/add-card" element={<AddCardPage />} />
-          <Route path="/card/:id" element={<CardDetailsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router basename="/e-wallet-Project">
+        {" "}
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/add-card" element={<AddCardPage />} />
+            <Route path="/card/:id" element={<CardDetailsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
