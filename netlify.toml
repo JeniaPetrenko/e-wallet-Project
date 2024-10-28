@@ -1,0 +1,4 @@
+# netlify.toml
+[build]
+  command = "npm run build"  # Команда збірки
+  publish = "dist"           # Папка, де зберігаються зібрані файли
