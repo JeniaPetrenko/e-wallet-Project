@@ -16,7 +16,7 @@ function App() {
   }, [theme]);
 
   return (
-    <Router basename="/e-wallet-Project">
+    <Router>
       <div className="App">
         <Header />
         <Routes>
